@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class JwtUser(
+    val id: String,
     private val email: String,
     private val password: String,
     private val authorities: List<GrantedAuthority>
