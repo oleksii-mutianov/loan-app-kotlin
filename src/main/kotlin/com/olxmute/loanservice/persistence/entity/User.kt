@@ -9,6 +9,7 @@ import javax.persistence.Enumerated
 import javax.persistence.FetchType
 import javax.persistence.JoinColumn
 import javax.persistence.JoinTable
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -22,10 +23,15 @@ class User(
     val employer: String,
     val salary: BigDecimal,
 
+        // TODO: store permissions in JSON
     @JoinTable(name = "permissions", joinColumns = [JoinColumn(name = "id")])
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    val permissions: List<Permission>
+    val permissions: List<Permission>,
+
+    @OneToMany
+    val loanApplications: Set<LoanApplication> = emptySet()
+
 ) : BaseEntity()
 
 enum class Permission {

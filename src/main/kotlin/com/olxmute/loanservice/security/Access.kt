@@ -13,7 +13,17 @@ annotation class Access {
 
     @Target(AnnotationTarget.FUNCTION)
     @Retention(AnnotationRetention.RUNTIME)
+    @PreAuthorize("hasAuthority('CREATE_PERSONAL_LOANS')")
+    annotation class CreatePersonalLoans
+
+    @Target(AnnotationTarget.FUNCTION)
+    @Retention(AnnotationRetention.RUNTIME)
     @PreAuthorize("hasAuthority('WRITE_ALL_LOANS')")
     annotation class WriteAllLoans
+
+    @Target(AnnotationTarget.FUNCTION)
+    @Retention(AnnotationRetention.RUNTIME)
+    @PreAuthorize("hasAuthority('READ_ALL_LOANS')")
+    annotation class ReadAllLoans
 
 }
