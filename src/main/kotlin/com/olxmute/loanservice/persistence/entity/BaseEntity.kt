@@ -1,11 +1,14 @@
 package com.olxmute.loanservice.persistence.entity
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType
 import org.hibernate.annotations.GenericGenerator
+import org.hibernate.annotations.TypeDef
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType::class)
 abstract class BaseEntity {
 
     @Id

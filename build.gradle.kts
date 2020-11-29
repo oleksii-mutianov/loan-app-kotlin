@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.jpa") version "1.3.72"
 }
 
-group = "com.twino"
+group = "com.olxmute"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -26,6 +26,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.vladmihalcea:hibernate-types-52:2.10.0")
 
 //	implementation("org.liquibase:liquibase-core")
     implementation("com.auth0:java-jwt:3.11.0")
