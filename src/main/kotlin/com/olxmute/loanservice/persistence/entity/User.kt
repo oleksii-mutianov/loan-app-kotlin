@@ -29,7 +29,7 @@ class User(
     @ElementCollection(fetch = FetchType.EAGER)
     val permissions: List<Permission>,
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     val loanApplications: Set<LoanApplication> = emptySet()
 
 ) : BaseEntity()
