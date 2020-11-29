@@ -1,14 +1,10 @@
 package com.olxmute.loanservice.persistence.entity
 
+import org.hibernate.annotations.Type
 import java.math.BigDecimal
 import java.time.LocalDate
-import javax.persistence.ElementCollection
+import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.FetchType
-import javax.persistence.JoinColumn
-import javax.persistence.JoinTable
 import javax.persistence.OneToMany
 import javax.persistence.Table
 
@@ -23,10 +19,8 @@ class User(
     val employer: String,
     val salary: BigDecimal,
 
-        // TODO: store permissions in JSON
-    @JoinTable(name = "permissions", joinColumns = [JoinColumn(name = "id")])
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
     val permissions: List<Permission>,
 
     @OneToMany(mappedBy = "user")
