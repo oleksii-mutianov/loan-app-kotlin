@@ -3,11 +3,13 @@ package com.olxmute.loanservice.service.impl
 import com.olxmute.loanservice.dto.CreatePersonalLoanApplicationDto
 import com.olxmute.loanservice.dto.LoanApplicationResponseDto
 import com.olxmute.loanservice.dto.PageResult
+import com.olxmute.loanservice.persistence.entity.LoanApplication
 import com.olxmute.loanservice.persistence.repository.LoanApplicationRepository
 import com.olxmute.loanservice.persistence.repository.UserRepository
 import com.olxmute.loanservice.service.LoanApplicationService
 import com.olxmute.loanservice.utils.toLoanApplication
 import com.olxmute.loanservice.utils.toLoanApplicationResponseDto
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -29,14 +31,24 @@ class LoanApplicationServiceImpl(
         return loanApplicationRepository.save(loanApplication).toLoanApplicationResponseDto()
     }
 
+    @Transactional
     override fun getLoanApplications(userId: String, page: Int, pageSize: Int): PageResult<LoanApplicationResponseDto> {
-        TODO("Not yet implemented")
+        val loanApplications = loanApplicationRepository.findAllByUserId(userId, PageRequest.of(page, pageSize))
+
+        return PageResult(
+                content = loanApplications.content.map(LoanApplication::toLoanApplicationResponseDto),
+                pageNumber = page,
+                pageSize = pageSize,
+                totalPages = loanApplications.totalPages,
+                first = loanApplications.isFirst,
+                last = loanApplications.isLast
+        )
     }
 
     @Transactional
     override fun getLoanApplication(loanApplicationId: String, userId: String): LoanApplicationResponseDto {
         return loanApplicationRepository
-                .findByIdAndUser_Id(loanApplicationId, userId)
+                .findByIdAndUserId(loanApplicationId, userId)
                 ?.toLoanApplicationResponseDto()
                 ?: throw RuntimeException("Loan application not found")
     }
