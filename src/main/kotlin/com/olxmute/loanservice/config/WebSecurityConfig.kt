@@ -24,15 +24,15 @@ class WebSecurityConfig(
 
     override fun configure(http: HttpSecurity) {
         http
-                .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .httpBasic().disable()
+            .csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                .and()
-                .authorizeRequests()
-                .anyRequest().permitAll()
+            .and()
+            .authorizeRequests()
+            .anyRequest().permitAll()
 
-                .and()
-                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .and()
+            .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
     }
 }

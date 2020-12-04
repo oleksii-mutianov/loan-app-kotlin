@@ -18,14 +18,14 @@ class UserServiceImpl(
 
     override fun register(dto: UserRegistrationDto): UserDto {
         val user = User(
-                email = dto.email,
-                password = passwordEncoder.encode(dto.password),
-                firstName = dto.firstName,
-                lastName = dto.lastName,
-                birthDate = dto.birthDate,
-                employer = dto.employer,
-                salary = dto.salary,
-                permissions = Permission.userPermissions
+            email = dto.email,
+            password = passwordEncoder.encode(dto.password),
+            firstName = dto.firstName,
+            lastName = dto.lastName,
+            birthDate = dto.birthDate,
+            employer = dto.employer,
+            salary = dto.salary,
+            permissions = Permission.userPermissions
         )
 
         return userRepository.save(user).toDto()

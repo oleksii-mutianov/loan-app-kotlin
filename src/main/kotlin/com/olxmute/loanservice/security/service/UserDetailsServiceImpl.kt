@@ -12,7 +12,7 @@ class UserDetailsServiceImpl(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String) =
-            userRepository.findByEmail(username)?.toJwtUser()
-                    ?: throw UsernameNotFoundException("User not found: $username")
+        userRepository.findByEmail(username)?.toJwtUser()
+            ?: throw UsernameNotFoundException("User not found: $username")
 
 }

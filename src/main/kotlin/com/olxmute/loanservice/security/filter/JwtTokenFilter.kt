@@ -20,7 +20,7 @@ class JwtTokenFilter(
 
         if (tokenValidator.isValid(jwtToken)) {
             authenticationTokenProvider.getAuthentication(jwtToken)
-                    ?.let { SecurityContextHolder.getContext().authentication = it }
+                ?.let { SecurityContextHolder.getContext().authentication = it }
         }
 
         filterChain.doFilter(request, response)

@@ -36,21 +36,21 @@ class LoanApplicationServiceImpl(
         val loanApplications = loanApplicationRepository.findAllByUserId(userId, PageRequest.of(page, pageSize))
 
         return PageResult(
-                content = loanApplications.content.map(LoanApplication::toLoanApplicationResponseDto),
-                pageNumber = page,
-                pageSize = pageSize,
-                totalPages = loanApplications.totalPages,
-                first = loanApplications.isFirst,
-                last = loanApplications.isLast
+            content = loanApplications.content.map(LoanApplication::toLoanApplicationResponseDto),
+            pageNumber = page,
+            pageSize = pageSize,
+            totalPages = loanApplications.totalPages,
+            first = loanApplications.isFirst,
+            last = loanApplications.isLast
         )
     }
 
     @Transactional
     override fun getLoanApplication(loanApplicationId: String, userId: String): LoanApplicationResponseDto {
         return loanApplicationRepository
-                .findByIdAndUserId(loanApplicationId, userId)
-                ?.toLoanApplicationResponseDto()
-                ?: throw RuntimeException("Loan application not found")
+            .findByIdAndUserId(loanApplicationId, userId)
+            ?.toLoanApplicationResponseDto()
+            ?: throw RuntimeException("Loan application not found")
     }
 
 }
