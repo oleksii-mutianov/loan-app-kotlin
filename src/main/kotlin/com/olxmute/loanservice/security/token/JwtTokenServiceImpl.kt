@@ -22,29 +22,29 @@ class JwtTokenServiceImpl(
     override fun createToken(subject: String): String {
         val now = LocalDateTime.now()
         return JWT.create()
-                .withSubject(subject)
-                .withIssuedAt(now.toLegacyDate())
-                .withExpiresAt(now.plusSeconds(timeToLive).toLegacyDate())
-                .sign(Algorithm.HMAC512(tokenSecret))
+            .withSubject(subject)
+            .withIssuedAt(now.toLegacyDate())
+            .withExpiresAt(now.plusSeconds(timeToLive).toLegacyDate())
+            .sign(Algorithm.HMAC512(tokenSecret))
     }
 
     override fun extractSubject(token: String): String {
         return token
-                .decodedJwt
-                .subject
+            .decodedJwt
+            .subject
     }
 
     override fun extractExpiredAt(token: String): LocalDateTime {
         return token
-                .decodedJwt
-                .expiresAt
-                .toLocalDateTime()
+            .decodedJwt
+            .expiresAt
+            .toLocalDateTime()
     }
 
     private val String.decodedJwt
         get() = JWT.require(Algorithm.HMAC512(tokenSecret))
-                .build()
-                .verify(this)
+            .build()
+            .verify(this)
 
 }
 
